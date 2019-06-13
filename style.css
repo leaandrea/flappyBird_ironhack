@@ -2,6 +2,11 @@
 
 body {
   text-align: center;
+
+}
+
+#game-board {
+  /* margin-top: 20px; */
 }
 
 body h1 {
@@ -9,23 +14,41 @@ body h1 {
   text-transform: uppercase;
 }
 
+#getready {
+  position: relative;
+  top: 160px;
+}
+
 /* logo and button */
 
 #flappyLogo {
-  margin-bottom: 25px;
-  width: 40%;
-  height: 150px;
+  margin-top: 5px;
+  width: 380px;
+  height: 120px;
+  margin-top: 10px;
 }
 
-body button {
+
+#new-button {
   font-size: 20px;
-  background-color: black;
+  background-color: white;
   color: #fff;
-  padding: 10px 20px;
+  padding: 5px 20px;
   border: 0;
   box-shadow: 0;
   border-radius: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 35px;
+}
+
+#start-button {
+  font-size: 20px;
+  background-color: black;
+  color: #fff;
+  padding: 5px 20px;
+  border: 0;
+  box-shadow: 0;
+  border-radius: 5px;
+  /* margin-top: 20px; */
 }
 
 /*canvas*/
@@ -35,3 +58,10 @@ body button {
   display: block;
   margin: 0 auto;
 }
+
+/* 
+#sprite-image {
+  height: 325px;
+  width: 184px;
+  background: url("faby.jpg") 0px 0px;
+} */
