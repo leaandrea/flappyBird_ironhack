@@ -1,23 +1,16 @@
 window.onload = function() {
-  document.body.onkeyup = function(e) {
-    // press space bar to start the game
-    if (e.keyCode == 32) {
-      startGame();
-    }
-  };
-
   var score = 0;
   // press space bar to move up
-  document.onkeydown = function(event) {
-    if (event.keyCode == 32) {
-      event.preventDefault();
-      Up();
-    }
-  };
+  // document.onkeydown = function(event) {
+  //   if (event.keyCode == 32) {
+  //     event.preventDefault();
+  //     Up();
+  //   }
+  // };
 
   var canvas = document.getElementById("myCanvas");
   var ctx = canvas.getContext("2d");
-
+  var started = false;
   // variables
   // var score = 0;
   var img = new Image();
@@ -56,9 +49,6 @@ window.onload = function() {
   var currentFrame = 0;
   var fabyImg = new Image();
   fabyImg.src = "images/faby1.png";
-  // fabyImg.onload = () => {
-  //   drawImage();
-  // };
 
   setInterval(function() {
     drawImage();
@@ -79,40 +69,41 @@ window.onload = function() {
       height,
       faby.x,
       faby.y,
-      width,
-      height
+      faby.width,
+      faby.height
     );
   }
 
   var faby = {
     x: 130,
     y: 190,
-    width: 61,
-    height: 50
+    width: 55,
+    height: 57
   };
 
   var gravity = 1.5;
 
   // faby sounds
   var fly = new Audio();
-  var scorePoint = new Audio();
   fly.src = "sounds/fly.wav";
-  scorePoint.src = "sounds/ez1.wav";
   var die = new Audio();
   die.src = "sounds/diesound.wav";
   var hit = new Audio();
-  hit.src = "hitsound.wav";
+  hit.src = "sounds/hitsound.wav";
+  var woosh = new Audio();
+  woosh.src = "sounds/wooshsound.wav";
 
-  // function playRandomSound() {
-  //   var sounds = [
-  //     new Audio("sounds/ezz.wav"),
-  //    new Audio("sounds/hitsound.wav"),
-  //     "sounds/hitsound.wav",
-  //     "sounds/hitsound.wav"
-  //   ];
-  //   var soundFile = sounds[Math.floor(Math.random() * sounds.length)];
-
-  // }
+  function playRandomSound() {
+    var sounds = [
+      new Audio(["sounds/ez1.wav"]),
+      new Audio(["sounds/ez1.wav"]),
+      new Audio(["sounds/score1.wav"]),
+      new Audio(["sounds/score1.wav"]),
+      new Audio(["sounds/score1.wav"])
+    ];
+    var soundFile = sounds[Math.floor(Math.random() * sounds.length)];
+    soundFile.play();
+  }
 
   // moving up faby when pressing space bar
   function Up() {
@@ -126,7 +117,7 @@ window.onload = function() {
     x: canvas.width,
     y: 0
   };
-  var spaceBetween = 117;
+  var spaceBetween = 110;
   var pipetop = new Image();
   var pipebottom = new Image();
   pipetop.src = "images/pipetop.png";
@@ -146,35 +137,39 @@ window.onload = function() {
       }
       // the collision part / if this or that, the faby touch a pipe and the game stops
       if (
-        (faby.x + faby.width > pipes[i].x &&
-          faby.x < pipes[i].x + pipetop.width &&
-          (faby.y < pipes[i].y + pipetop.height ||
-            faby.y + faby.height > pipes[i].y + totalTop)) ||
-        faby.y + faby.height > canvas.height
+        (faby.x - 5 + faby.width > pipes[i].x &&
+          faby.x - 5 < pipes[i].x + pipetop.width &&
+          (faby.y + 2 < pipes[i].y + pipetop.height ||
+            faby.y - 5 + faby.height > pipes[i].y + totalTop)) ||
+        faby.y - 7 + faby.height > canvas.height
       ) {
-        isCrashed = true;
-        document.getElementById("gameover").classList.add("active");
-        setInterval(() => location.reload(), 3800);
+        if ((isCrashed = true)) {
+          hit.play();
+          document.getElementById("gameover").classList.add("active");
+          setInterval(() => location.reload(), 3800);
+        }
       }
       // if a pipe is at a certain place it means the faby has made a point
       // if ((pipes[i].x <= 80) & (pipes[i].x >= 60)) { -> other possitbility tried but didn't work with the score
       if (pipes[i].x == 70) {
+        playRandomSound();
         score++;
-        scorePoint.play();
       }
     }
   }
 
   // function for the game to run correctly and infinitly
   function startGame() {
+    started = true;
     // for the "get ready" to disappear after the game has started
-    document.getElementById("getready").outerHTML = "";
-    // const x = document.getElementById("getready");
-    // if (x) x.outerHTML = "";
+    // document.getElementById("getready").outerHTML = "";
+    const x = document.getElementById("getready");
+    if (x) x.classList.add("is-hidden");
     drawingLoop();
     document.onkeydown = function(event) {
       if (isCrashed) return;
       if (event.keyCode == 32) {
+        fly.play();
         event.preventDefault();
         Up();
       }
@@ -193,4 +188,12 @@ window.onload = function() {
       });
     }
   }
+
+  document.body.onkeyup = function(e) {
+    // press space bar to start the game
+    if (e.keyCode == 32 && !started) {
+      startGame();
+      woosh.play();
+    }
+  };
 };

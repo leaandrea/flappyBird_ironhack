@@ -9,6 +9,9 @@ body {
 
 }
 
+.is-hidden {
+  display: none;
+}
 
 body h1 {
   font-size: 30px;
@@ -51,17 +54,17 @@ body h1 {
 
 
 
-
 #gameover {
   display: none;
 
 }
 
+
 #gameover.active {
   display: block;
   position: absolute;
   top: 300px;
-  left: 630px;
+  left: 600px;
 }
 
 /* 
@@ -70,3 +73,22 @@ body h1 {
   width: 184px;
   background: url("faby.jpg") 0px 0px;
 } */
+
+@media only screen and (max-width: 1600px) {
+
+  #flappyLogo {
+    width: 419px;
+  }
+
+  #getready {
+    position: absolute;
+    top: 50vh;
+    left: 44vw;
+  }
+
+  #gameover.active {
+    position: absolute;
+    top: 50vh;
+    left: 42vw;
+  }
+}
