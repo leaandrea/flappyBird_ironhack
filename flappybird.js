@@ -113,7 +113,6 @@ window.onload = function() {
       new Audio(["sounds/score1.wav"]),
       new Audio(["sounds/score1.wav"]),
       new Audio(["sounds/score1.wav"]),
-      new Audio(["sounds/score1.wav"]),
       new Audio(["sounds/iziriding.wav"]),
       new Audio(["sounds/score1.wav"]),
       new Audio(["sounds/score1.wav"]),
@@ -138,7 +137,7 @@ window.onload = function() {
     x: canvas.width,
     y: 0
   };
-  var spaceBetween = 110;
+  var spaceBetween = 109;
   var pipetop = new Image();
   var pipebottom = new Image();
   pipetop.src = "images/pipetop.png";
