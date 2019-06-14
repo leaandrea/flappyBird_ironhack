@@ -38,7 +38,6 @@ window.onload = function() {
   function Score() {
     ctx.fillStyle = "black";
     ctx.font = "25px Permanent Marker";
-    // ctx.globalCompositeOperation = "source - atop";
     ctx.fillText("score : " + score, 30, 40);
   }
 
@@ -169,7 +168,7 @@ window.onload = function() {
   // function for the game to run correctly and infinitly
   function startGame() {
     // for the "get ready" to disappear after the game has started
-    document.getElementById("getready").innerHTML = "";
+    document.getElementById("getready").outerHTML = "";
     // const x = document.getElementById("getready");
     // if (x) x.outerHTML = "";
     drawingLoop();
