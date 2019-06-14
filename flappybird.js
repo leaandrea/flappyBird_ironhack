@@ -57,9 +57,13 @@ window.onload = function() {
   var currentFrame = 0;
   var fabyImg = new Image();
   fabyImg.src = "images/faby1.png";
-  fabyImg.onload = () => {
+  // fabyImg.onload = () => {
+  //   drawImage();
+  // };
+
+  setInterval(function() {
     drawImage();
-  };
+  }, 500);
 
   function updateFrame() {
     currentFrame = ++currentFrame % cols;
@@ -151,16 +155,13 @@ window.onload = function() {
       ) {
         isCrashed = true;
         document.getElementById("gameover").classList.add("active");
-        setInterval(() => location.reload(), 2800);
+        setInterval(() => location.reload(), 3800);
       }
       // if a pipe is at a certain place it means the faby has made a point
-      // if ((pipes[i].x <= 80) & (pipes[i].x >= 60)) {
+      // if ((pipes[i].x <= 80) & (pipes[i].x >= 60)) { -> other possitbility tried but didn't work with the score
       if (pipes[i].x == 70) {
         score++;
         scorePoint.play();
-        // setTimeout(() => {
-        //   scorePoint.pause();
-        // }, 1000);
       }
     }
   }
@@ -168,30 +169,18 @@ window.onload = function() {
   // function for the game to run correctly and infinitly
   function startGame() {
     // for the "get ready" to disappear after the game has started
-    document.getElementById("getready").outerHTML = "";
+    document.getElementById("getready").innerHTML = "";
+    // const x = document.getElementById("getready");
+    // if (x) x.outerHTML = "";
     drawingLoop();
     document.onkeydown = function(event) {
+      if (isCrashed) return;
       if (event.keyCode == 32) {
         event.preventDefault();
         Up();
       }
     };
   }
-
-  // function displayScore() {
-  //   ctx.fillStyle = "#000";
-  //   ctx.font = "20px Verdana";
-  //   ctx.fillText("Score : " + score, 10, canvas.height - 20);
-  //   return score;
-  // }
-
-  // //to display the score
-  // setTimeout(() => {
-  //   set();
-  // }, 7000);
-  // function set() {
-  //   setInterval(() => (score = score + 1), 3500);
-  // }
 
   function drawingLoop() {
     if (isCrashed === false) {
