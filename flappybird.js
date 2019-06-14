@@ -1,33 +1,46 @@
 window.onload = function() {
-  document.getElementById("start-button").onclick = function() {
-    startGame();
+  document.body.onkeyup = function(e) {
+    // press space bar to start the game
+    if (e.keyCode == 32) {
+      startGame();
+    }
+  };
+  var score = 0;
+  // press space bar to move up
+  document.onkeydown = function(event) {
+    if (event.keyCode == 32) {
+      event.preventDefault();
+      Up();
+    }
   };
 
   var canvas = document.getElementById("myCanvas");
   var ctx = canvas.getContext("2d");
 
+  // variables
+  // var score = 0;
   var img = new Image();
   img.src = "images/background.png";
   var imgX = 0;
   var imgY = 0;
-
   var isCrashed = false;
 
+  // background image
   img.onload = function() {
     ctx.drawImage(img, 0, 0);
   };
-
   function drawBackground() {
     ctx.drawImage(img, 0, 0);
     faby.y = faby.y + gravity;
-    // ctx.drawImage(img, imgX + canvas.width, 0);
+    ctx.fillStyle = "#000";
+    ctx.font = "20px Verdana";
+    ctx.fillText("score : " + score, 30, canvas.height - 20);
   }
 
+  // variables and functions for the sprites of faby
   var srcX;
-
   var trackUp = 1;
   var trackNone = 0;
-
   var sheetWidth = 190;
   var sheetHeight = 63;
   var frameCount = 3;
@@ -43,12 +56,9 @@ window.onload = function() {
     drawImage();
   };
 
-  var moveUp = false;
-
   function updateFrame() {
     currentFrame = ++currentFrame % cols;
     srcX = currentFrame * width;
-    //ctx.clearRect(faby.x, faby.y, width, height);
   }
 
   function drawImage() {
@@ -65,15 +75,12 @@ window.onload = function() {
       height
     );
   }
-  // setInterval(function() {
-  //   drawImage();
-  // }, 500);
 
   var faby = {
     x: 130,
     y: 190,
     width: 61,
-    height: 53
+    height: 50
   };
 
   var gravity = 1.5;
@@ -82,22 +89,37 @@ window.onload = function() {
   var fly = new Audio();
   var scorePoint = new Audio();
   fly.src = "sounds/fly.wav";
-  scorePoint.src = "sounds/score.wav";
+  scorePoint.src = "sounds/ez1.wav";
   var die = new Audio();
   die.src = "sounds/diesound.wav";
   var hit = new Audio();
   hit.src = "hitsound.wav";
 
+  // function playRandomSound() {
+  //   var sounds = [
+  //     "sounds/ezz.wav",
+  //     "sounds/hitsound.wav",
+  //     "sounds/hitsound.wav",
+  //     "sounds/hitsound.wav"
+  //   ];
+
+  //   var soundFile = sounds[Math.floor(Math.random() * sounds.length)];
+  //   var soundFile = new Audio();
+  // }
+
+  // moving up faby when pressing space bar
   function Up() {
     faby.y -= 40;
   }
+
+  // the pipes part - variables and big function to create the pipes
 
   var pipes = [];
   pipes[0] = {
     x: canvas.width,
     y: 0
   };
-  var spaceBetween = 112;
+  var spaceBetween = 117;
   var pipetop = new Image();
   var pipebottom = new Image();
   pipetop.src = "images/pipetop.png";
@@ -115,6 +137,7 @@ window.onload = function() {
           y: Math.floor(Math.random() * pipetop.height) - pipetop.height
         });
       }
+      // the collision part / if this or that, the faby touch a pipe and the game stops
       if (
         (faby.x + faby.width > pipes[i].x &&
           faby.x < pipes[i].x + pipetop.width &&
@@ -123,10 +146,13 @@ window.onload = function() {
         faby.y + faby.height > canvas.height
       ) {
         isCrashed = true;
-        setInterval(() => location.reload(), 2000);
+        // document.getElementById("getready").classList.add("gameoverbitch");
+        setInterval(() => location.reload(), 2800);
       }
-      if ((pipes[i].x <= 80) & (pipes[i].x >= 60)) {
-        // put score here maybe
+      // if a pipe is at a certain place it means the faby has made a point
+      // if ((pipes[i].x <= 80) & (pipes[i].x >= 60)) {
+      if (pipes[i].x == 70) {
+        score++;
         scorePoint.play();
         // setTimeout(() => {
         //   scorePoint.pause();
@@ -158,10 +184,12 @@ window.onload = function() {
   //   <img src="images/gameover.png" width="150px" height="50px">
   // </div>
 
+  // function for the game to run correctly and infinitly
   function startGame() {
-    document.getElementById(
-      "start-button"
-    ).outerHTML = `<button id="new-button">Start New Game</button>`;
+    // document.getElementById(
+    //   "start-button"
+    // ).outerHTML = `<button id="new-button">Start New Game</button>`;
+    // for the "get ready" to disappear after the game has started
     document.getElementById("getready").outerHTML = "";
     drawingLoop();
     document.onkeydown = function(event) {
@@ -171,6 +199,21 @@ window.onload = function() {
       }
     };
   }
+
+  // function displayScore() {
+  //   ctx.fillStyle = "#000";
+  //   ctx.font = "20px Verdana";
+  //   ctx.fillText("Score : " + score, 10, canvas.height - 20);
+  //   return score;
+  // }
+
+  // //to display the score
+  // setTimeout(() => {
+  //   set();
+  // }, 7000);
+  // function set() {
+  //   setInterval(() => (score = score + 1), 3500);
+  // }
 
   function drawingLoop() {
     if (isCrashed === false) {
@@ -183,6 +226,4 @@ window.onload = function() {
       });
     }
   }
-
-  //setInterval(() => drawingLoop(), 50);
 };
