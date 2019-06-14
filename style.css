@@ -95,6 +95,6 @@ body h1 {
   #gameover.active {
     position: absolute;
     top: 50vh;
-    left: 42vw;
+    left: 43vw;
   }
 }
