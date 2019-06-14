@@ -5,6 +5,7 @@ window.onload = function() {
       startGame();
     }
   };
+
   var score = 0;
   // press space bar to move up
   document.onkeydown = function(event) {
@@ -32,9 +33,13 @@ window.onload = function() {
   function drawBackground() {
     ctx.drawImage(img, 0, 0);
     faby.y = faby.y + gravity;
-    ctx.fillStyle = "#000";
-    ctx.font = "20px Verdana";
-    ctx.fillText("score : " + score, 30, canvas.height - 20);
+  }
+
+  function Score() {
+    ctx.fillStyle = "black";
+    ctx.font = "25px Permanent Marker";
+    // ctx.globalCompositeOperation = "source - atop";
+    ctx.fillText("score : " + score, 30, 40);
   }
 
   // variables and functions for the sprites of faby
@@ -97,14 +102,13 @@ window.onload = function() {
 
   // function playRandomSound() {
   //   var sounds = [
-  //     "sounds/ezz.wav",
-  //     "sounds/hitsound.wav",
+  //     new Audio("sounds/ezz.wav"),
+  //    new Audio("sounds/hitsound.wav"),
   //     "sounds/hitsound.wav",
   //     "sounds/hitsound.wav"
   //   ];
-
   //   var soundFile = sounds[Math.floor(Math.random() * sounds.length)];
-  //   var soundFile = new Audio();
+
   // }
 
   // moving up faby when pressing space bar
@@ -146,7 +150,7 @@ window.onload = function() {
         faby.y + faby.height > canvas.height
       ) {
         isCrashed = true;
-        // document.getElementById("getready").classList.add("gameoverbitch");
+        document.getElementById("gameover").classList.add("active");
         setInterval(() => location.reload(), 2800);
       }
       // if a pipe is at a certain place it means the faby has made a point
@@ -161,34 +165,8 @@ window.onload = function() {
     }
   }
 
-  // function gameOver() {
-  //   if (
-  //     (faby.x + faby.width > pipes[i].x &&
-  //       faby.x < pipes[i].x + pipetop.width &&
-  //       (faby.y < pipes[i].y + pipetop.height ||
-  //         faby.y + faby.height > pipes[i].y + totalTop)) ||
-  //     faby.y + faby.height > canvas.height
-  //   ) {
-  //   }
-  //   //   faby.y += 45;
-  //   // faby = 424;
-  // }
-
-  // // }
-  // setTimeout(() => (isCrashed = true), 200);
-  // document.getElementById(
-  //   "new-button"
-  // ).outerHTML = `<button id="start-button">Start New Game</button>`;
-  //   document.getElementById("getready").outerHTML = `
-  //   <div id="getready">
-  //   <img src="images/gameover.png" width="150px" height="50px">
-  // </div>
-
   // function for the game to run correctly and infinitly
   function startGame() {
-    // document.getElementById(
-    //   "start-button"
-    // ).outerHTML = `<button id="new-button">Start New Game</button>`;
     // for the "get ready" to disappear after the game has started
     document.getElementById("getready").outerHTML = "";
     drawingLoop();
@@ -221,6 +199,7 @@ window.onload = function() {
       drawBackground();
       drawImage();
       Pipes();
+      Score();
       requestAnimationFrame(function() {
         drawingLoop();
       });
