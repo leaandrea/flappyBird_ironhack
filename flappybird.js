@@ -137,7 +137,7 @@ window.onload = function() {
     x: canvas.width,
     y: 0
   };
-  var spaceBetween = 109;
+  var spaceBetween = 110;
   var pipetop = new Image();
   var pipebottom = new Image();
   pipetop.src = "images/pipetop.png";
