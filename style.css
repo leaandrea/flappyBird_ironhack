@@ -9,6 +9,13 @@ body {
 
 }
 
+#myCanvas {
+  border: 1px solid #000;
+  display: block;
+  margin: 0 auto;
+
+}
+
 .is-hidden {
   display: none;
 }
@@ -29,7 +36,7 @@ body h1 {
   left: 630px;
 }
 
-/* logo and button */
+/* logos*/
 
 #flappyLogo {
   margin-top: 5px;
@@ -45,13 +52,17 @@ body h1 {
 
 }
 
-#myCanvas {
-  border: 1px solid #000;
-  display: block;
-  margin: 0 auto;
 
+
+#getready.active {
+  display: none;
 }
 
+#getready {
+  position: absolute;
+  top: 300px;
+  left: 630px;
+}
 
 
 #gameover {
@@ -67,12 +78,7 @@ body h1 {
   left: 600px;
 }
 
-/* 
-#sprite-image {
-  height: 325px;
-  width: 184px;
-  background: url("faby.jpg") 0px 0px;
-} */
+
 
 @media only screen and (max-width: 1600px) {
 

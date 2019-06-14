@@ -95,8 +95,29 @@ window.onload = function() {
 
   function playRandomSound() {
     var sounds = [
-      new Audio(["sounds/ez1.wav"]),
-      new Audio(["sounds/ez1.wav"]),
+      new Audio(["sounds/iziriding.wav"]),
+      new Audio(["sounds/iziriding.wav"]),
+      new Audio(["sounds/iziriding.wav"]),
+      new Audio(["sounds/iziriding.wav"]),
+      new Audio(["sounds/score1.wav"]),
+      new Audio(["sounds/iziriding.wav"]),
+      new Audio(["sounds/score1.wav"]),
+      new Audio(["sounds/izimoyen.wav"]),
+      new Audio(["sounds/iziriding.wav"]),
+      new Audio(["sounds/izimelancolique.wav"]),
+      new Audio(["sounds/score1.wav"]),
+      new Audio(["sounds/score1.wav"]),
+      new Audio(["sounds/evadeeee.wav"]),
+      new Audio(["sounds/score1.wav"]),
+      new Audio(["sounds/score1.wav"]),
+      new Audio(["sounds/score1.wav"]),
+      new Audio(["sounds/score1.wav"]),
+      new Audio(["sounds/score1.wav"]),
+      new Audio(["sounds/score1.wav"]),
+      new Audio(["sounds/iziriding.wav"]),
+      new Audio(["sounds/score1.wav"]),
+      new Audio(["sounds/score1.wav"]),
+      new Audio(["sounds/score1.wav"]),
       new Audio(["sounds/score1.wav"]),
       new Audio(["sounds/score1.wav"]),
       new Audio(["sounds/score1.wav"])
@@ -139,8 +160,8 @@ window.onload = function() {
       if (
         (faby.x - 5 + faby.width > pipes[i].x &&
           faby.x - 5 < pipes[i].x + pipetop.width &&
-          (faby.y + 2 < pipes[i].y + pipetop.height ||
-            faby.y - 5 + faby.height > pipes[i].y + totalTop)) ||
+          (faby.y + 6 < pipes[i].y + pipetop.height ||
+            faby.y - 11 + faby.height > pipes[i].y + totalTop)) ||
         faby.y - 7 + faby.height > canvas.height
       ) {
         if ((isCrashed = true)) {
@@ -151,7 +172,7 @@ window.onload = function() {
       }
       // if a pipe is at a certain place it means the faby has made a point
       // if ((pipes[i].x <= 80) & (pipes[i].x >= 60)) { -> other possitbility tried but didn't work with the score
-      if (pipes[i].x == 70) {
+      if (pipes[i].x == 76) {
         playRandomSound();
         score++;
       }
