@@ -95,31 +95,8 @@ window.onload = function() {
 
   function playRandomSound() {
     var sounds = [
-      new Audio(["sounds/iziriding.wav"]),
-      new Audio(["sounds/iziriding.wav"]),
-      new Audio(["sounds/iziriding.wav"]),
-      new Audio(["sounds/iziriding.wav"]),
       new Audio(["sounds/score1.wav"]),
-      new Audio(["sounds/iziriding.wav"]),
-      new Audio(["sounds/score1.wav"]),
-      new Audio(["sounds/izimoyen.wav"]),
-      new Audio(["sounds/izimoyen.wav"]),
-      new Audio(["sounds/izimoyen.wav"]),
-      new Audio(["sounds/izimoyen.wav"]),
-      new Audio(["sounds/iziriding.wav"]),
-      new Audio(["sounds/izimelancolique.wav"]),
-      new Audio(["sounds/score1.wav"]),
-      new Audio(["sounds/score1.wav"]),
-      new Audio(["sounds/evadeeee.wav"]),
-      new Audio(["sounds/score1.wav"]),
-      new Audio(["sounds/score1.wav"]),
-      new Audio(["sounds/score1.wav"]),
-      new Audio(["sounds/score1.wav"]),
-      new Audio(["sounds/izimoyen.wav"]),
-      new Audio(["sounds/score1.wav"]),
-      new Audio(["sounds/iziriding.wav"]),
-      new Audio(["sounds/score1.wav"]),
-      new Audio(["sounds/score1.wav"]),
+
       new Audio(["sounds/score1.wav"])
     ];
     var soundFile = sounds[Math.floor(Math.random() * sounds.length)];
